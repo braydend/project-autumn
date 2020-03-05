@@ -24,7 +24,7 @@ const Sensors = () => {
     return (
         <SensorContainer>
             {sensors.map(({ name, warning }) => (
-                <SensorCard warning={warning}>{name}</SensorCard>
+                <SensorCard key={name} warning={warning}>{name}</SensorCard>
             ))}
         </SensorContainer>
     );
