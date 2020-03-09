@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Environment variables can be stored in `spacebucket-web/.env`;
+Environment variables can be stored in `spacebucket-web/.env`.
+
+Latest master commits are hosted on Netlify: https://braydend.spacebucket.netlify.com/.
 
 ## Available Scripts
 
