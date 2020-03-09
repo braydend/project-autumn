@@ -14,6 +14,7 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+    console.table('env vars:', process.env)
     return (
         <AppContainer>
             <header className="App-header">
