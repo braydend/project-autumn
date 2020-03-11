@@ -9,7 +9,9 @@ Raspberry Pi will have 3 main responsibilities:
 - Controlling water flow to the plant with a soil moisture sensor and a solonoid.
 
 ## [Web app](https://braydend.spacebucket.netlify.com/)
-Will be hosted on Netlify and read data from Firebase.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c53ffc26-c8c6-48a8-af27-6f9aaaa0d603/deploy-status)](https://app.netlify.com/sites/braydend-spacebucket/deploys)
+
+App is hosted on Netlify and will read data from Firebase.
 
 Website will have the following responsibilities:
 - Displaying the latest sensor data from the database
