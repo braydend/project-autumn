@@ -4,6 +4,7 @@ import Sensors from "./components/SensorList";
 import { getFirestoreInstance } from "./utils/firestore";
 import { getFirebaseConnection } from "./utils/firebase";
 import Sensor from "./types/sensor";
+import { isEnvironmentValid } from "./utils/utils";
 
 const AppContainer = styled.div`
     background-color: #282c34;
@@ -15,6 +16,8 @@ const AppContainer = styled.div`
     font-size: calc(10px + 2vmin);
     color: white;
 `;
+
+if (!isEnvironmentValid()) throw new Error("Check environment variables");
 
 const firestore = getFirestoreInstance(getFirebaseConnection());
 
