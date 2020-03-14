@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Environment variables can be stored in `spacebucket-web/.env`.
+Environment variables also need to be provided to Netlify and GitHub.
+When more environment variables are added to the app, they should be added to the checks in `src/utils/utils` `isEnvironmentValid()`, this will ensure the environment vars are correctly set before running the app.
 
 Latest master commits are hosted on Netlify: https://braydend-spacebucket.netlify.com/.
 
