@@ -8,7 +8,7 @@ Raspberry Pi will have 3 main responsibilities:
 - Controlling the lights on a timer. _Low priority: Allow times to be adjusted from the web app._
 - Controlling water flow to the plant with a soil moisture sensor and a solonoid.
 
-## [Web app](https://braydend.spacebucket.netlify.com/)
+## [Web app](https://braydend-spacebucket.netlify.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c53ffc26-c8c6-48a8-af27-6f9aaaa0d603/deploy-status)](https://app.netlify.com/sites/braydend-spacebucket/deploys)
 
 App is hosted on Netlify and will read data from Firebase.

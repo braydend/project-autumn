@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Environment variables can be stored in `spacebucket-web/.env`.
 
-Latest master commits are hosted on Netlify: https://braydend.spacebucket.netlify.com/.
+Latest master commits are hosted on Netlify: https://braydend-spacebucket.netlify.com/.
 
 ## Available Scripts
 
