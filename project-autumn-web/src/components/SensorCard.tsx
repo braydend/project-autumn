@@ -11,7 +11,7 @@ const SensorCard = ({ sensor: { name, value } }: Props) => {
     const Card = styled.div`
         display: flex;
         flex-grow: 1;
-        background: ${warning ? "#e63946" : "#80ff72"};
+        background: ${warning ? "#B01622" : "#0A6800"};
         margin: 1rem;
         padding: 1rem;
         border-radius: 4px;
