@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Sensors from "./components/SensorList";
 import { getFirestoreInstance } from "./utils/firestore";
 import { getFirebaseConnection } from "./utils/firebase";
-import Sensor from "./types/sensor";
+import Sensor from "./types/Sensor";
 import { isEnvironmentValid } from "./utils/utils";
 
 const AppContainer = styled.div`
@@ -41,7 +41,7 @@ function App() {
     return (
         <AppContainer>
             <header className="App-header">
-                <h1>Spacebucket sensors</h1>
+                <h1>Project Autumn</h1>
             </header>
             <Sensors sensors={sensors} />
         </AppContainer>
