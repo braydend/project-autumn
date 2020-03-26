@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-        working-directory: ./spacebucket-web
+        working-directory: ./project-autumn-web
       - run: npm run build --if-present
-        working-directory: ./spacebucket-web
+        working-directory: ./project-autumn-web
       - run: npm test
-        working-directory: ./spacebucket-web
+        working-directory: ./project-autumn-web
         env:
           CI: true
           REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
