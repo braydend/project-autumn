@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Sensor from "../types/sensor";
+import Sensor from "../types/Sensor";
 import SensorCard from "./SensorCard";
 
 const SensorListContainer = styled.div`

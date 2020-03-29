@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Sensors from "./components/SensorList";
 import { getFirestoreInstance } from "./utils/firestore";
 import { getFirebaseConnection } from "./utils/firebase";
-import Sensor from "./types/sensor";
+import Sensor from "./types/Sensor";
 import { isEnvironmentValid } from "./utils/utils";
+import { requiredEnv } from "./consts/env";
 
 const AppContainer = styled.div`
     background-color: #282c34;
@@ -17,7 +18,8 @@ const AppContainer = styled.div`
     color: white;
 `;
 
-if (!isEnvironmentValid()) throw new Error("Check environment variables");
+if (!isEnvironmentValid(process.env, requiredEnv))
+    throw new Error("Check environment variables");
 
 const firestore = getFirestoreInstance(getFirebaseConnection());
 
@@ -41,7 +43,7 @@ function App() {
     return (
         <AppContainer>
             <header className="App-header">
-                <h1>Spacebucket sensors</h1>
+                <h1>Project Autumn</h1>
             </header>
             <Sensors sensors={sensors} />
         </AppContainer>

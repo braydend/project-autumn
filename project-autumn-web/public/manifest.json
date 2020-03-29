@@ -1,6 +1,6 @@
 {
-  "short_name": "Spacebucket Monitor",
-  "name": "Monitor the status of your spacebucket",
+  "short_name": "Project Autumn Monitor",
+  "name": "Web interface for Project Autumn",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
