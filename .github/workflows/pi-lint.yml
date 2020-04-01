@@ -1,4 +1,4 @@
-name: Lint React App
+name: Lint Node App
 
 on:
   push:
@@ -18,18 +18,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 10
 
       - name: Install Node.js dependencies
         run: npm install
-        working-directory: ./project-autumn-web
+        working-directory: ./project-autumn-pi
 
       - name: Run linters
         uses: samuelmeuli/lint-action@v1
         with:
           github_token: ${{ secrets.github_token }}
-          eslint_dir: project-autumn-web/src
-          eslint_extensions: js,jsx,ts,tsx
+          eslint_dir: project-autumn-pi/src
+          eslint_extensions: ts
           eslint: true
           prettier_dir: project-autumn-web/src
           prettier: true
