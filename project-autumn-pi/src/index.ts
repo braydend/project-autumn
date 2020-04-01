@@ -1,12 +1,37 @@
+import { config } from "dotenv";
 import { CronJob } from "cron";
+import { isEnvironmentValid } from "./utils/utils";
+import { getFirestoreInstance } from "./utils/firestore";
+import { getFirebaseConnection } from "./utils/firebase";
+import { requiredEnv } from "./consts/env";
+import { SensorData } from "./types/Sensor";
 
-let n = 1;
+// Creates environment variables from .env
+config();
 
-const job = new CronJob("* * * * * *", () => {
-  console.log(
-    `This message will print every second.\nThis has printed ${n} times.\n`
-  );
-  n++;
-});
+// Ensures environment is correctly configured before continuing
+if (!isEnvironmentValid(process.env, requiredEnv))
+  throw new Error("Check environment variables");
 
-job.start();
+const firestore: firebase.firestore.Firestore = getFirestoreInstance(
+  getFirebaseConnection()
+);
+
+const eventLoop: () => void = async () => {
+  const sensorData: SensorData[] = [];
+  await firestore
+    .collection("sensors")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const { name, value } = doc.data();
+        const typedData: SensorData = { name, value };
+        sensorData.push(typedData);
+      });
+    });
+  console.table(sensorData);
+};
+
+const app: CronJob = new CronJob("* * * * * *", eventLoop);
+
+app.start();
