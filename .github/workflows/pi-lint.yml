@@ -31,5 +31,5 @@ jobs:
           eslint_dir: project-autumn-pi/src
           eslint_extensions: ts
           eslint: true
-          prettier_dir: project-autumn-web/src
+          prettier_dir: project-autumn-pi/src
           prettier: true
