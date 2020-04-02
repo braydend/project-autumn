@@ -11,10 +11,13 @@ const isEnvironmentValid = (
   env: NodeJS.ProcessEnv,
   requiredVars: string[]
 ): boolean => {
-  checkEnvironment(env, requiredVars);
-  return requiredVars.reduce((acc: boolean, cur) => {
-    return env[cur] ? acc : false;
-  }, true);
+  try {
+    checkEnvironment(env, requiredVars);
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 export { isEnvironmentValid, checkEnvironment };
