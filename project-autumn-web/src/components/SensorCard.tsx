@@ -45,10 +45,13 @@ const SensorCard = ({ sensor, variant }: Props) => {
 
     const Card = styled.div`
         display: flex;
-        flex-grow: 1;
         flex-direction: column;
         align-items: center;
         text-align: center;
+        flex-basis: 40%;
+        @media (max-width: 650px) {
+            flex-basis: 100%;
+        }
         background: ${warning ? "#B01622" : "#0A6800"};
         margin: 1rem;
         padding: 1rem;
