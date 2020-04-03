@@ -21,9 +21,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/cron": "^1.7.2",
     "@types/node": "^13.9.8",
-    "cron": "^1.8.2",
     "dotenv": "^8.2.0",
     "ds18b20-raspi": "^0.3.4",
     "firebase": "^7.13.1"
