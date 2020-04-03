@@ -6,8 +6,8 @@ import { getFirebaseConnection } from "./utils/firebase";
 import { requiredEnv } from "./consts/env";
 import Sensor, { DS18B20 } from "./types/Sensor";
 import {
-  transformDS18B20ArrayToSensorArray,
-  getDataForSensor,
+    transformDS18B20ArrayToSensorArray,
+    getDataForSensor,
 } from "./utils/ds18b20";
 
 // Doesnt have types or use ESM :(
@@ -19,27 +19,27 @@ config();
 
 // Ensures environment is correctly configured before continuing
 if (!isEnvironmentValid(process.env, requiredEnv))
-  throw new Error("Check environment variables");
+    throw new Error("Check environment variables");
 
 const firestore: firebase.firestore.Firestore = getFirestoreInstance(
-  getFirebaseConnection()
+    getFirebaseConnection()
 );
 
 const readAndPersistTemperatures = (): void => {
-  const allDS18B20Sensors: DS18B20[] = ds18b20Raspi.readAllC();
+    const allDS18B20Sensors: DS18B20[] = ds18b20Raspi.readAllC();
 
-  const ds18b20Sensors = transformDS18B20ArrayToSensorArray(
-    allDS18B20Sensors,
-    firestore
-  );
+    const ds18b20Sensors = transformDS18B20ArrayToSensorArray(
+        allDS18B20Sensors,
+        firestore
+    );
 
-  ds18b20Sensors.forEach((sensor: Sensor) => {
-    sensor.storeData(getDataForSensor(sensor, allDS18B20Sensors));
-  });
+    ds18b20Sensors.forEach((sensor: Sensor) => {
+        sensor.storeData(getDataForSensor(sensor, allDS18B20Sensors));
+    });
 };
 
 const eventLoop = (): void => {
-  readAndPersistTemperatures();
+    readAndPersistTemperatures();
 };
 
 // Runs the event loop every 30 minutes
