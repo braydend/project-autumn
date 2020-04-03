@@ -39,7 +39,9 @@ const SensorCard = ({ sensor, variant }: Props) => {
 
     if (!latestData) return <p>Loading</p>;
 
-    const warning = latestData.value < 20;
+    const warning =
+        sensor.getMin() > latestData.value ||
+        latestData.value > sensor.getMax();
 
     const Card = styled.div`
         display: flex;

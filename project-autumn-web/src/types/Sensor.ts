@@ -9,17 +9,23 @@ export default class Sensor {
     private id: string;
     private name: string;
     private type: SensorType;
+    private min: number;
+    private max: number;
     private connection: firebase.firestore.Firestore;
 
     constructor(
         id: string,
         name: string,
         type: SensorType,
+        min: number,
+        max: number,
         connection: firebase.firestore.Firestore
     ) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.min = min;
+        this.max = max;
         this.connection = connection;
     }
 
@@ -33,6 +39,14 @@ export default class Sensor {
 
     public getType(): SensorType {
         return this.type;
+    }
+
+    public getMin(): number {
+        return this.min;
+    }
+
+    public getMax(): number {
+        return this.max;
     }
 
     public async fetchData(): Promise<SensorData[] | false> {

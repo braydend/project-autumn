@@ -1,6 +1,9 @@
 import { sensorIdNameMap } from "../consts/ds18b20";
 import Sensor, { DS18B20, SensorData, SensorType } from "../types/Sensor";
 
+const DEFAULT_MIN = 20;
+const DEFAULT_MAX = 30;
+
 export const getNameFromSensorId = (id: string): string | false => {
   const value = sensorIdNameMap.get(id);
   if (value === undefined) return false;
@@ -14,7 +17,14 @@ export const transformDS18B20ToSensor = (
   const { id } = ds18b20;
   const name = getNameFromSensorId(id);
   if (!name) throw Error(`No corresponding name for DS18B20 id: ${id}`);
-  return new Sensor(id, name, SensorType.Temperature, connection);
+  return new Sensor(
+    id,
+    name,
+    SensorType.Temperature,
+    DEFAULT_MIN,
+    DEFAULT_MAX,
+    connection
+  );
 };
 
 export const transformDS18B20ArrayToSensorArray = (
