@@ -1,5 +1,10 @@
 export type SensorData = { value: number; timestamp: number };
 
+export enum SensorType {
+    Temperature = "temperature",
+    Moisture = "moisture"
+}
+
 export default class Sensor {
     private id: string;
     private name: string;
