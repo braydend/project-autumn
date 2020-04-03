@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Sensor, { SensorData } from "../types/Sensor";
-
-export enum SensorCardVariant {
-    Temperature,
-    Moisture
-}
+import Sensor, { SensorData, SensorType } from "../types/Sensor";
 
 interface Props {
     sensor: Sensor;
-    variant: SensorCardVariant;
+    variant: SensorType;
 }
 
 const Timestamp = styled.div`
@@ -31,10 +26,10 @@ const SensorCard = ({ sensor, variant }: Props) => {
 
     const getVariantUnits = (value: number) => {
         switch (variant) {
-            case SensorCardVariant.Temperature:
+            case SensorType.Temperature:
                 return <small>{value}&deg;C</small>;
 
-            case SensorCardVariant.Moisture:
+            case SensorType.Moisture:
                 return <small>{value ? "Moist" : "Dry"}</small>;
 
             default:
