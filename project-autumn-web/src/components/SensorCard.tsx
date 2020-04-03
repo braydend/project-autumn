@@ -20,7 +20,7 @@ const SensorCard = ({ sensor, variant }: Props) => {
         });
     }, [sensor]);
 
-    const getVariantUnits = (value: number) => {
+    const addVariantUnitsToValue = (value: number) => {
         switch (variant) {
             case SensorType.Temperature:
                 return <small>{value}&deg;C</small>;
@@ -56,9 +56,7 @@ const SensorCard = ({ sensor, variant }: Props) => {
     `;
     return (
         <Card>
-            <strong>
-                {getVariantUnits(latestData.value)}
-            </strong>
+            <strong>{addVariantUnitsToValue(latestData.value)}</strong>
             <h2>{sensor.getName()}</h2>
             <Timestamp>
                 {new Date(latestData.timestamp).toLocaleString()}
