@@ -12,6 +12,7 @@ import {
 // Doesnt have types or use ESM :(
 // eslint-disable-next-line
 const ds18b20Raspi = require("ds18b20-raspi");
+const cron = require("node-cron");
 
 // Creates environment variables from .env
 config();
@@ -33,13 +34,17 @@ const readAndPersistTemperatures = (): void => {
   );
 
   ds18b20Sensors.forEach((sensor: Sensor) => {
+    console.log(`Persisting data for ${sensor.getId()}`);
     sensor.storeData(getDataForSensor(sensor, allDS18B20Sensors));
   });
 };
 
 const main = (): void => {
+  console.log("Running project-autumn...");
   readAndPersistTemperatures();
+  console.log("Sleeping...");
 };
 
 // App entrypoint
-main();
+// Run main() every hour
+cron.schedule("0 * * * *", main);
