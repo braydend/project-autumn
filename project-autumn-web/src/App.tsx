@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Sensors from "./components/SensorList";
+import SensorList from "./components/SensorList";
 import { getFirestoreInstance } from "./utils/firestore";
 import { getFirebaseConnection } from "./utils/firebase";
 import Sensor from "./types/Sensor";
@@ -33,8 +33,8 @@ function App() {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach(doc => {
-                    const { name, value } = doc.data();
-                    sensorArray.push({ name, value });
+                    const { name } = doc.data();
+                    sensorArray.push(new Sensor(doc.id, name, firestore));
                 });
                 setSensors(sensorArray);
             });
@@ -45,7 +45,7 @@ function App() {
             <header className="App-header">
                 <h1>Project Autumn</h1>
             </header>
-            <Sensors sensors={sensors} />
+            <SensorList sensors={sensors} />
         </AppContainer>
     );
 }
