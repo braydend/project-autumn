@@ -11,10 +11,6 @@ const Timestamp = styled.div`
     font-size: 0.5em;
 `;
 
-const Section = styled.div`
-    padding: 1rem 0;
-`;
-
 const SensorCard = ({ sensor, variant }: Props) => {
     const [latestData, setLatestData] = useState<SensorData | undefined>();
 
@@ -49,23 +45,24 @@ const SensorCard = ({ sensor, variant }: Props) => {
         align-items: center;
         text-align: center;
         flex-basis: 40%;
+        justify-content: space-between;
         @media (max-width: 650px) {
             flex-basis: 100%;
         }
         background: ${warning ? "#B01622" : "#0A6800"};
         margin: 1rem;
-        padding: 1rem;
+        padding: 1.5rem 1rem;
         border-radius: 4px;
     `;
     return (
         <Card>
-            <Section>{getVariantUnits(latestData.value)}</Section>
-            <Section>{sensor.getName()}</Section>
-            <Section>
-                <Timestamp>
-                    {new Date(latestData.timestamp).toLocaleString()}
-                </Timestamp>
-            </Section>
+            <strong>
+                {getVariantUnits(latestData.value)}
+            </strong>
+            <h2>{sensor.getName()}</h2>
+            <Timestamp>
+                {new Date(latestData.timestamp).toLocaleString()}
+            </Timestamp>
         </Card>
     );
 };
