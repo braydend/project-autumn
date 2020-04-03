@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Sensor from "../types/Sensor";
-import SensorCard from "./SensorCard";
+import SensorCard, { SensorCardVariant } from "./SensorCard";
 
 const SensorListContainer = styled.div`
     display: flex;
@@ -17,8 +17,9 @@ const SensorList = ({ sensors }: Props) => {
         <SensorListContainer>
             {sensors.map(sensor => (
                 <SensorCard
-                    key={`${sensor.name}-${sensor.value}`}
+                    key={sensor.getId()}
                     sensor={sensor}
+                    variant={SensorCardVariant.Temperature}
                 />
             ))}
         </SensorListContainer>
