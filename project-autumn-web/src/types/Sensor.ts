@@ -1,17 +1,25 @@
 export type SensorData = { value: number; timestamp: number };
 
+export enum SensorType {
+    Temperature = "temperature",
+    Moisture = "moisture"
+}
+
 export default class Sensor {
     private id: string;
     private name: string;
+    private type: SensorType;
     private connection: firebase.firestore.Firestore;
 
     constructor(
         id: string,
         name: string,
+        type: SensorType,
         connection: firebase.firestore.Firestore
     ) {
         this.id = id;
         this.name = name;
+        this.type = type;
         this.connection = connection;
     }
 
@@ -21,6 +29,10 @@ export default class Sensor {
 
     public getName(): string {
         return this.name;
+    }
+
+    public getType(): SensorType {
+        return this.type;
     }
 
     public async fetchData(): Promise<SensorData[] | false> {

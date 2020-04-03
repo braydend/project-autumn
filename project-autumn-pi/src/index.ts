@@ -28,7 +28,7 @@ const firestore: firebase.firestore.Firestore = getFirestoreInstance(
 const readAndPersistTemperatures = (): void => {
   const allDS18B20Sensors: DS18B20[] = ds18b20Raspi.readAllC();
 
-  const ds18b20Sensors = transformDS18B20ArrayToSensorArray(
+  const ds18b20Sensors: Sensor[] = transformDS18B20ArrayToSensorArray(
     allDS18B20Sensors,
     firestore
   );

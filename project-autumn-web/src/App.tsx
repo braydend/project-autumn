@@ -33,8 +33,8 @@ function App() {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach(doc => {
-                    const { name } = doc.data();
-                    sensorArray.push(new Sensor(doc.id, name, firestore));
+                    const { name, type } = doc.data();
+                    sensorArray.push(new Sensor(doc.id, name, type, firestore));
                 });
                 setSensors(sensorArray);
             });

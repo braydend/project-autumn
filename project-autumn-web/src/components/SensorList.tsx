@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Sensor from "../types/Sensor";
-import SensorCard, { SensorCardVariant } from "./SensorCard";
+import SensorCard from "./SensorCard";
 
 const SensorListContainer = styled.div`
     display: flex;
@@ -19,7 +19,7 @@ const SensorList = ({ sensors }: Props) => {
                 <SensorCard
                     key={sensor.getId()}
                     sensor={sensor}
-                    variant={SensorCardVariant.Temperature}
+                    variant={sensor.getType()}
                 />
             ))}
         </SensorListContainer>
