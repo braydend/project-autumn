@@ -6,6 +6,7 @@ import SensorCard from "./SensorCard";
 const SensorListContainer = styled.div`
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 `;
 
 interface Props {
