@@ -1,5 +1,4 @@
 import { config } from "dotenv";
-import { CronJob } from "cron";
 import { isEnvironmentValid } from "./utils/utils";
 import { getFirestoreInstance } from "./utils/firestore";
 import { getFirebaseConnection } from "./utils/firebase";
@@ -38,11 +37,9 @@ const readAndPersistTemperatures = (): void => {
   });
 };
 
-const eventLoop = (): void => {
+const main = (): void => {
   readAndPersistTemperatures();
 };
 
-// Runs the event loop at the top of every hour
-const app: CronJob = new CronJob("0 * * * * *", eventLoop);
-
-app.start();
+// App entrypoint
+main();
