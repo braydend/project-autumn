@@ -1,4 +1,5 @@
 export type SensorData = { value: number; timestamp: number };
+export type DS18B20 = { id: string; t: number };
 
 export default class Sensor {
   private id: string;
@@ -14,6 +15,10 @@ export default class Sensor {
     this.name = name;
     this.connection = connection;
     this.createDocument();
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   private createDocument(): boolean {

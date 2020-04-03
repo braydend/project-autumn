@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "jest",  
+    "test": "jest",
     "coverage": "jest --coverage"
   },
   "author": "braydend",
@@ -25,6 +25,7 @@
     "@types/node": "^13.9.8",
     "cron": "^1.8.2",
     "dotenv": "^8.2.0",
+    "ds18b20-raspi": "^0.3.4",
     "firebase": "^7.13.1"
   }
 }
