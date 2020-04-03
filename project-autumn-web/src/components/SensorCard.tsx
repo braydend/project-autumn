@@ -48,6 +48,7 @@ const SensorCard = ({ sensor, variant }: Props) => {
         flex-grow: 1;
         flex-direction: column;
         align-items: center;
+        text-align: center;
         background: ${warning ? "#B01622" : "#0A6800"};
         margin: 1rem;
         padding: 1rem;
