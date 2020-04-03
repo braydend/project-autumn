@@ -1,6 +1,4 @@
-Repo for autonomous space bucket and accompanying website. 
-
-## Space bucket
+## Project Autumn
 Raspberry Pi controlled will be running Node.js apps complete with humidity, air temperature and soil temperature sensors, Timer controlled lights and fans, and regulated watering.
 
 Raspberry Pi will have 3 main responsibilities:
