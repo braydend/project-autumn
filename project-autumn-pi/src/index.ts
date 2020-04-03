@@ -42,7 +42,7 @@ const eventLoop = (): void => {
   readAndPersistTemperatures();
 };
 
-// Runs the event loop every 30 minutes
-const app: CronJob = new CronJob("*/30 * * * * *", eventLoop);
+// Runs the event loop at the top of every hour
+const app: CronJob = new CronJob("0 * * * * *", eventLoop);
 
 app.start();
