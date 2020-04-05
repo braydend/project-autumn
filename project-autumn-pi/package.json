@@ -25,6 +25,7 @@
     "dotenv": "^8.2.0",
     "ds18b20-raspi": "^0.3.4",
     "firebase": "^7.13.1",
-    "node-cron": "^2.0.3"
+    "node-cron": "^2.0.3",
+    "onoff": "^5.0.1"
   }
 }

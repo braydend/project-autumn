@@ -3,15 +3,17 @@ import { isEnvironmentValid } from "./utils/utils";
 import { getFirestoreInstance } from "./utils/firestore";
 import { getFirebaseConnection } from "./utils/firebase";
 import { requiredEnv } from "./consts/env";
-import Sensor, { DS18B20 } from "./types/Sensor";
+import Sensor, { DS18B20, SensorType } from "./types/Sensor";
 import {
   transformDS18B20ArrayToSensorArray,
   getDataForSensor,
 } from "./utils/ds18b20";
+import { getSensorDataForMoistureSensor, SOIL_MOISTURE_MIN, SOIL_MOISTURE_MAX } from "./utils/moistureSensor";
 
 // Doesnt have types or use ESM :(
 // eslint-disable-next-line
 const ds18b20Raspi = require("ds18b20-raspi");
+// eslint-disable-next-line
 const cron = require("node-cron");
 
 // Creates environment variables from .env
@@ -34,14 +36,21 @@ const readAndPersistTemperatures = (): void => {
   );
 
   ds18b20Sensors.forEach((sensor: Sensor) => {
-    console.log(`Persisting data for ${sensor.getId()}`);
     sensor.storeData(getDataForSensor(sensor, allDS18B20Sensors));
   });
+};
+
+const readAndPersistMoistureSensor = (): void => {
+  // The data pin connected to soil moiture sensor
+  const GPIO = 26;
+  const moistureSensor = new Sensor('moisture-sensor-1', 'Soil moisture', SensorType.Moisture, SOIL_MOISTURE_MIN , SOIL_MOISTURE_MAX, firestore);
+  moistureSensor.storeData(getSensorDataForMoistureSensor(GPIO));
 };
 
 const main = (): void => {
   console.log("Running project-autumn...");
   readAndPersistTemperatures();
+  readAndPersistMoistureSensor();
   console.log("Sleeping...");
 };
 

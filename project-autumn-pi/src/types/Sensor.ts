@@ -51,6 +51,7 @@ export default class Sensor {
   }
 
   public storeData(data: SensorData): boolean {
+    console.log(`Persisting data for ${this.id}`);
     try {
       this.connection
         .collection("sensors")
