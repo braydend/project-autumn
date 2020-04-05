@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Sensor, { SensorData, SensorType } from "../types/Sensor";
+import Sensor, { SensorData, SensorType, MoistureSensorStates } from "../types/Sensor";
 
 interface Props {
     sensor: Sensor;
@@ -26,7 +26,7 @@ const SensorCard = ({ sensor, variant }: Props) => {
                 return <small>{value}&deg;C</small>;
 
             case SensorType.Moisture:
-                return <small>{value ? "Moist" : "Dry"}</small>;
+                return <small>{value === MoistureSensorStates.WET ? "Moist" : "Dry"}</small>;
 
             default:
                 return <small>{value} units</small>;
