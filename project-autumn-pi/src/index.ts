@@ -9,7 +9,7 @@ import {
   getDataForSensor,
 } from "./utils/ds18b20";
 
-// Doesnt have types or use ESM :( lolcommit test
+// Doesnt have types or use ESM :(
 // eslint-disable-next-line
 const ds18b20Raspi = require("ds18b20-raspi");
 const cron = require("node-cron");
