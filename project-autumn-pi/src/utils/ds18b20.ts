@@ -4,8 +4,8 @@ import Sensor, { DS18B20, SensorData, SensorType } from "../types/Sensor";
 const DEFAULT_MIN = 20;
 const DEFAULT_MAX = 30;
 
-export const getNameFromSensorId = (id: string): string | false => {
-  const value = sensorIdNameMap.get(id);
+export const getNameFromSensorId = (sensors: Map<string,string>, id: string): string | false => {
+  const value = sensors.get(id);
   if (value === undefined) return false;
   return value;
 };
