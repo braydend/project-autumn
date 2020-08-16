@@ -11,6 +11,7 @@
   "author": "braydend",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^13.9.8",
     "@types/jest": "^25.1.4",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
@@ -21,10 +22,8 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/node": "^13.9.8",
     "dotenv": "^8.2.0",
     "ds18b20-raspi": "^0.3.4",
-    "firebase": "^7.13.1",
     "node-cron": "^2.0.3",
     "onoff": "^5.0.1"
   }
