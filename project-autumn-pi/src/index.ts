@@ -41,6 +41,8 @@ const readAndPersistMoistureSensor: () => void = async () => {
 
   // Send request to endpoint with id, type and reading
   const resp = await sendData(moistureSensor);
+  
+  console.log(resp);
 };
 
 const main = async () => {
@@ -52,4 +54,5 @@ const main = async () => {
 
 // App entrypoint
 // Run main() every hour
-cron.schedule("0 * * * *", main);
+// cron.schedule("0 * * * *", main);
+main();
