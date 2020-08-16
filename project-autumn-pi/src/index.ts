@@ -14,18 +14,22 @@ const cron = require("node-cron");
 // Creates environment variables from .env
 config();
 
-const readAndPersistTemperatures = (): void => {
+const readAndPersistTemperatures: () => void = async () => {
   const allDS18B20Sensors: DS18B20[] = ds18b20Raspi.readAllC();
 
   const ds18b20Sensors: Sensor[] = transformDS18B20ArrayToSensorArray(
     allDS18B20Sensors,
   );
 
-  ds18b20Sensors.forEach((sensor: Sensor) => {
-    // Send request to endpoint with id, type and reading
+  for (const sensor of ds18b20Sensors) {
+    await sendData(sensor);
+  }
 
-    // sensor.storeData(getDataForSensor(sensor, allDS18B20Sensors));
-  });
+  // ds18b20Sensors.forEach((sensor: Sensor) => {
+  //   // Send request to endpoint with id, type and reading
+
+  //   // sensor.storeData(getDataForSensor(sensor, allDS18B20Sensors));
+  // });
 };
 
 const readAndPersistMoistureSensor: () => void = async () => {
@@ -40,13 +44,13 @@ const readAndPersistMoistureSensor: () => void = async () => {
   // const moistureReading = getSensorDataForMoistureSensor(GPIO);
 
   // Send request to endpoint with id, type and reading
-  const resp = await sendData(moistureSensor);
+  await sendData(moistureSensor);
 };
 
-const main = async () => {
+const main = () => {
   console.log("Running project-autumn...");
-  // await readAndPersistTemperatures();
-  await readAndPersistMoistureSensor();
+  readAndPersistTemperatures();
+  readAndPersistMoistureSensor();
   console.log("Sleeping...");
 };
 
