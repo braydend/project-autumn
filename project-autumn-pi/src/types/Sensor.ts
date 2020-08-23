@@ -10,6 +10,7 @@ type Sensor = {
   type: SensorType,
   name: string,
   id: string,
+  reading?: SensorData,
 };
 
 export default Sensor;
