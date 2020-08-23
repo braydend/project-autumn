@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Sensor from "../types/Sensor";
+import { Sensor }  from "../typesAndHooks";
 import SensorCard from "./SensorCard";
 
 const SensorListContainer = styled.div`
@@ -16,11 +16,11 @@ interface Props {
 const SensorList = ({ sensors }: Props) => {
     return (
         <SensorListContainer>
-            {sensors.map(sensor => (
+            {sensors.map((sensor) => (
                 <SensorCard
-                    key={sensor.getId()}
+                    key={sensor.id}
                     sensor={sensor}
-                    variant={sensor.getType()}
+                    variant={sensor.type}
                 />
             ))}
         </SensorListContainer>

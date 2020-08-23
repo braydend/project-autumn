@@ -1,21 +1,20 @@
-const isEnvironmentValid = (
-    env: NodeJS.ProcessEnv,
-    requiredVars: string[]
-): boolean => {
-    checkEnvironment(env, requiredVars);
-    return requiredVars.reduce((acc: boolean, cur) => {
-        return env[cur] ? acc : false;
-    }, true);
+import EnvironmentVariable from "../consts/env";
+import { SensorData } from "../typesAndHooks";
+
+export const getEnvironmentVariable: (key: EnvironmentVariable) => string = (key) => {
+  const value = process.env[`REACT_APP_${key}`];
+
+  if (!value) {
+    throw new Error(`Environment variable: ${key} does not exist`);
+  }
+
+  return value;
 };
 
-const checkEnvironment = (
-    env: NodeJS.ProcessEnv,
-    requiredVars: string[]
-): void => {
-    requiredVars.forEach((envVar: string) => {
-        if (!env[envVar])
-            throw new Error(`Mising environent variable: ${envVar}`);
-    });
-};
+export const getDateStringForSensorData = (reading: SensorData, includeTime: boolean = true): string => {
+  const date = new Date(parseInt(reading.timestamp));
+  const dateString = date.toLocaleDateString();
+  const timeString = date.toLocaleTimeString();
 
-export { isEnvironmentValid, checkEnvironment };
+  return `${includeTime ? timeString : ''} ${dateString}`;
+};
