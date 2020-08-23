@@ -32,7 +32,7 @@ const APIServer: () => void = () => {
     };
 
     const server = new GraphQLServer({ typeDefs, resolvers });
-    server.start(() => console.log('GraphQL API Server is running on localhost:4000'));
+    server.start(() => console.log('GraphQL API Server is running on port 4000'));
 };
 
 export default APIServer;

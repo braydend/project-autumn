@@ -13,6 +13,7 @@ export const getNameFromSensorId = (id: string): string | false => {
 
 export const transformDS18B20ToSensor = (
   ds18b20: DS18B20,
+  timestamp?: Date,
 ): Sensor => {
   const { id, t } = ds18b20;
   const name = getNameFromSensorId(id);
@@ -23,14 +24,15 @@ export const transformDS18B20ToSensor = (
     id,
     name,
     type: SensorType.Temperature,
-    reading: { timestamp: Date.now().toString(), value: t },
+    reading: { timestamp: timestamp?.toString() || new Date().toString(), value: t },
   };
 };
 
 export const transformDS18B20ArrayToSensorArray = (
   ds18b20Array: DS18B20[],
+  timestamp?: Date,
 ): Sensor[] => {
-  return ds18b20Array.map(ds18b20 => transformDS18B20ToSensor(ds18b20));
+  return ds18b20Array.map(ds18b20 => transformDS18B20ToSensor(ds18b20, timestamp));
 };
 
 export const getDataForSensor = (
@@ -38,7 +40,7 @@ export const getDataForSensor = (
   ds18b20Array: DS18B20[]
 ): SensorData => {
   const ds18b20 = ds18b20Array.find(
-    ({ id }: { id: string }) => id === sensorId
+    ({ id }) => id === sensorId
   );
   if (!ds18b20)
     throw Error(`Unable to get data for sensor ID: ${sensorId}`);

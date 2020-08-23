@@ -1,6 +1,4 @@
-import EnvironmentVariable from "../consts/env";
-
-const getEnvironmentVariable: (key: EnvironmentVariable) => string = (key) => {
+const getEnvironmentVariable: (key: string) => string = (key) => {
   const value = process.env[key];
 
   if (!value) {
