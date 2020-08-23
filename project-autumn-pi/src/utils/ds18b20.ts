@@ -1,6 +1,6 @@
 import { sensorIdNameMap } from "../consts/ds18b20";
 import Sensor, { DS18B20, SensorData, SensorType } from "../types/Sensor";
-import { sendData } from "./utils";
+
 // Doesnt have types or use ESM :(
 // eslint-disable-next-line
 const ds18b20Raspi = require("ds18b20-raspi");
@@ -23,7 +23,7 @@ export const transformDS18B20ToSensor = (
     id,
     name,
     type: SensorType.Temperature,
-    reading: { timestamp: Date.now(), value: t },
+    reading: { timestamp: Date.now().toString(), value: t },
   };
 };
 
@@ -44,17 +44,14 @@ export const getDataForSensor = (
     throw Error(`Unable to get data for sensor ID: ${sensorId}`);
   return {
     value: ds18b20.t,
-    timestamp: Date.now(),
+    timestamp: Date.now().toString(),
   };
 };
 
-export const readAndPersistTemperatures: () => void = async () => {
+export const getAllTemperatureSensors: () => Sensor[] = () => {
   const allDS18B20Sensors: DS18B20[] = ds18b20Raspi.readAllC();
-  const ds18b20Sensors: Sensor[] = transformDS18B20ArrayToSensorArray(
+  
+  return transformDS18B20ArrayToSensorArray(
     allDS18B20Sensors,
   );
-
-  for (const sensor of ds18b20Sensors) {
-    await sendData(sensor);
-  }
 };
