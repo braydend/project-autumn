@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import SensorList from "./components/SensorList";
-import { getFirestoreInstance } from "./utils/firestore";
-import { getFirebaseConnection } from "./utils/firebase";
-import Sensor from "./types/Sensor";
-import { isEnvironmentValid } from "./utils/utils";
-import { requiredEnv } from "./consts/env";
+import { useGetAllSensorsQuery } from "./typesAndHooks";
 
 const AppContainer = styled.div`
     background-color: #282c34;
@@ -18,29 +14,13 @@ const AppContainer = styled.div`
     color: white;
 `;
 
-if (!isEnvironmentValid(process.env, requiredEnv))
-    throw new Error("Check environment variables");
-
-const firestore = getFirestoreInstance(getFirebaseConnection());
-
 function App() {
-    const [sensors, setSensors] = useState<Sensor[]>([]);
+    const { data, loading, error } = useGetAllSensorsQuery();
 
-    useEffect(() => {
-        let sensorArray: Sensor[] = [];
-        firestore
-            .collection("sensors")
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(doc => {
-                    const { name, type, min, max } = doc.data();
-                    sensorArray.push(
-                        new Sensor(doc.id, name, type, min, max, firestore)
-                    );
-                });
-                setSensors(sensorArray);
-            });
-    }, []);
+    if (loading) return <div>Loading...</div>;
+    if (error || !data) return <div>Something went wrong!</div>;
+
+    const { sensors } = data;
 
     return (
         <AppContainer>

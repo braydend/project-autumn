@@ -1,43 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import Sensor, { SensorData, SensorType, MoistureSensorStates } from "../types/Sensor";
+import { Sensor, SensorType, SensorData } from "../typesAndHooks";
+import { MoistureSensorState } from "../enums";
+import { getDateStringForSensorData } from "../utils/utils";
 
-interface Props {
+type Props = {
     sensor: Sensor;
     variant: SensorType;
+    min?: number;
+    max?: number;
 }
 
 const Timestamp = styled.div`
     font-size: 0.5em;
 `;
 
-const SensorCard = ({ sensor, variant }: Props) => {
-    const [latestData, setLatestData] = useState<SensorData | undefined>();
-
-    useEffect(() => {
-        sensor.getLastestData().then(data => {
-            if (data) setLatestData(data);
-        });
-    }, [sensor]);
-
+const SensorCard: React.FC<Props> = ({ sensor: { reading, name }, variant, min = 0, max = 100 }) => {
     const addVariantUnitsToValue = (value: number) => {
         switch (variant) {
             case SensorType.Temperature:
                 return <small>{value}&deg;C</small>;
 
             case SensorType.Moisture:
-                return <small>{value === MoistureSensorStates.WET ? "Moist" : "Dry"}</small>;
+                return <small>{value === MoistureSensorState.WET ? "Moist" : "Dry"}</small>;
 
             default:
                 return <small>{value} units</small>;
         }
     };
 
-    if (!latestData) return <p>Loading</p>;
+    const isTemperature = variant === SensorType.Temperature;
+    const isReadingSet = reading !== null && reading !== undefined;
+    const isReadingWithinBounds = isReadingSet 
+        // TS can't infer what reading is typed, so need to override the compiler.
+        && min < (reading as SensorData).value 
+        && (reading as SensorData).value < max;
 
-    const warning =
-        sensor.getMin() > latestData.value ||
-        latestData.value > sensor.getMax();
+    const warning = isTemperature ? !isReadingWithinBounds : reading?.value === MoistureSensorState.DRY ;
 
     const Card = styled.div`
         display: flex;
@@ -54,12 +53,13 @@ const SensorCard = ({ sensor, variant }: Props) => {
         padding: 1.5rem 1rem;
         border-radius: 4px;
     `;
+
     return (
         <Card>
-            <strong>{addVariantUnitsToValue(latestData.value)}</strong>
-            <h2>{sensor.getName()}</h2>
+            <strong>{reading ? addVariantUnitsToValue(reading.value) : "?"}</strong>
+            <h2>{name}</h2>
             <Timestamp>
-                {new Date(latestData.timestamp).toLocaleString()}
+                {reading ? getDateStringForSensorData(reading) : "?"}
             </Timestamp>
         </Card>
     );

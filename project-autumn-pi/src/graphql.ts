@@ -11,7 +11,7 @@ const APIServer: () => void = () => {
         }
 
         type Sensor {
-            type: String!
+            type: SensorType!
             name: String!
             id: String!
             reading: SensorData
@@ -20,6 +20,11 @@ const APIServer: () => void = () => {
         type SensorData { 
             value: Float!
             timestamp: String! 
+        }
+
+        enum SensorType {
+            MOISTURE,
+            TEMPERATURE,
         }
     `;
 
