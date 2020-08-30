@@ -14,3 +14,7 @@ App is hosted on Netlify and will read data from Firebase.
 Website will have the following responsibilities:
 - Displaying the latest sensor data from the database
 - _Low priority: Graph data over time_
+
+
+## Project Plan
+![Project plan](Project-autumn-plan.svg)
