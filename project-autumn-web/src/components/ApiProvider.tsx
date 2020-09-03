@@ -6,6 +6,9 @@ import React from 'react';
 const client = new ApolloClient({
   uri: getEnvironmentVariable(EnvironmentVariable.API_ENDPOINT),
   cache: new InMemoryCache(),
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 });
 
 const ApiProvider: React.FC  = ({ children }) => <ApolloProvider client={client} >{children}</ApolloProvider>;
